@@ -47,6 +47,32 @@ export default function QueryProcessor(query: string): string {
     } else {
       return "Query does not match the expected format.";
     }
+  }
+
+  if (query.toLowerCase().includes("primes")) {
+    const regexPattern = /Which of the following numbers are primes: ((\d+),? ?)+\?/;
+    const match = query.match(regexPattern);
+
+    if (match) {
+      const numbers = match[1].match(/\d+/g); // Extract numbers
+      if (numbers) {
+        const primeNumbers = numbers.filter(number => {
+          if (Number(number) < 2) return false;
+          for (let i = 2; i <= Math.sqrt(Number(number)); i++) {
+            if (Number(number) % i === 0) return false;
+          }
+          return true;
+        });
+
+        if (primeNumbers.length > 0) {
+          return primeNumbers.join(", ");
+        } else {
+          return "None of the given numbers are prime.";
+        }
+      }
+    } else {
+      return "Query does not match the expected format.";
+    }
   } else {
     return "Operation not supported";
   }
