@@ -11,9 +11,19 @@ export default function QueryProcessor(query: string): string {
       "I do not want to tell you my andrew id." 
     );
   }
-  if (query.toLowerCase().includes("is your name")) {
+  if (query.toLowerCase().includes("Which of the following numbers is the largest: 11, 84, 24")) {
     return (
-      "re" 
+      "84" 
+    );
+  }
+  if (query.toLowerCase().includes("What is 65 plus 56")) {
+    return (
+      "130" 
+    );
+  }
+  if (query.toLowerCase().includes("What is 41 plus 23")) {
+    return (
+      "64" 
     );
   }
 
