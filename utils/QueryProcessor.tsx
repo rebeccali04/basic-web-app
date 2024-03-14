@@ -17,8 +17,10 @@ export default function QueryProcessor(query: string): string {
     );
   }
   // Check if the query includes a mathematical operation
+  query = query.toLowerCase();
   if (query.includes("what is")) {
     // Extract the numbers and the operation from the query
+    
     const numbers = query.match(/\d+/g); // Extracts all numbers
     const operation = query.match(/plus|minus|times|divided by/g)[0]; // Extracts the operation
 
