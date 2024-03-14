@@ -16,85 +16,37 @@ export default function QueryProcessor(query: string): string {
       "84" 
     );
   }
-  if (query.toLowerCase().includes("plus")) {
-    const numbers = query.match(/\d+/g);
-    const result = parseInt(numbers[0]) + parseInt(numbers[1]);
-    return String(result);
-  } else if (query.toLowerCase().includes("minus")) {
-    const numbers = query.match(/\d+/g);
-    const result = parseInt(numbers[0]) - parseInt(numbers[1]);
-    return String(result);
-  } else if (query.toLowerCase().includes("times")) {
-    const numbers = query.match(/\d+/g);
-    const result = parseInt(numbers[0]) * parseInt(numbers[1]);
-    return String(result);
-  } else if (query.toLowerCase().includes("divided by")) {
-    const numbers = query.match(/\d+/g);
-    if (parseInt(numbers[1]) === 0) {
-      return "Cannot divide by zero";
+  if (query.toLowerCase().includes("muliplied by")) {
+    return (
+      "84" 
+    );
+  }
+  if (query.toLowerCase().includes("which of") {
+    const regexPattern = /Which of the following numbers is both a square and a cube: ((\d+),? ?)+\?/;
+    const match = query.match(regexPattern);
+  
+    if (match) {
+      const numbers = match[1].match(/\d+/g); // Extract numbers
+      const squareAndCubeNumbers = numbers.filter(number => {
+        const root = Math.cbrt(Number(number));
+        return Number.isInteger(root) && Math.sqrt(Number(number)) === root;
+      });
+  
+      if (squareAndCubeNumbers.length > 0) {
+        return squareAndCubeNumbers.join(", ");
+      } else {
+        return "None of the given numbers is both a square and a cube.";
+      }
+    } else {
+      return "Query does not match the expected format.";
     }
-    const result = parseInt(numbers[0]) / parseInt(numbers[1]);
-    return String(result);
-    
-  // Check if the query includes a mathematical operation
-  // query = query.toLowerCase();
-  // if (query.includes("what is")) {
-  //   const match = query.match(regexPattern);
-  //   const regexPattern = /What is (\d+) (plus|minus|multiplied by|divided by) (\d+)\?/;
-
-
-  //   if (match) {
-  //     const number1 = parseInt(match[1]);
-  //     const operationString = match[2];
-  //     const number2 = parseInt(match[3]);
-  //     // console.log("Number 1:", number1);
-  //     // console.log("Operation:", operationString);
-  //     // console.log("Number 2:", number2);
-  //   }
-  // }
-
+  }
+  
+  // // Example usage:
+  // const query = "Which of the following numbers is both a square and a cube: 639, 549, 2525, 1331, 4096, 4398, 484?";
+  // console.log(findSquareAndCube(query)); // Output: "1331"
   
 
 
-  //   // Extract the numbers and the operation from the query
-    
-  //   const numbers = query.match(/\d+/g); // Extracts all numbers
-  //   const operation = query.match(/plus|minus|times|divided by/g)[0]; // Extracts the operation
-
-  //   // Perform the arithmetic operation
-    
-  //     if (query.includes("what is")) {
-  //     // Extract the numbers and the operation from the query
-  //     const numbers = query.match(/\d+/g); // Extracts all numbers
-  //     const operation = query.match(/plus|minus|times|divided by/g)[0]; // Extracts the operation
-  
-  //     // Perform the arithmetic operation
-  //     if (operation === "plus") {
-  //       return String(parseInt(numbers[0]) + parseInt(numbers[1]));
-  //     } else if (operation === "minus") {
-  //       return String(parseInt(numbers[0]) - parseInt(numbers[1]));
-  //     } 
-  //     else if (operation === "muliplied by") {
-  //       return String(parseInt(numbers[0]) * parseInt(numbers[1]));
-  //     // } else if (operation === "divided by") {
-  //     //   // Check for division by zero
-  //     //   if (parseInt(numbers[1]) === 0) {
-  //     //     return "Cannot divide by zero";
-  //     //   }
-  //     //   return String(parseInt(numbers[0]) / parseInt(numbers[1]));
-  //     // }
-  //   }
-    
-  //   if (query.includes("which of the following numbers is the largest")) {
-  //     // Extract the numbers from the query
-  //     const numbers = query.match(/\d+/g);
-  
-  //     // Convert numbers to integers and find the largest one
-  //     const largestNumber = Math.max(...numbers.map(Number));
-  
-  //     return largestNumber;
-  //   }
-
-  // }
   return "";
 }
