@@ -35,6 +35,21 @@ export default function QueryProcessor(query: string): string {
     }
   }
   // const regex1 = 
+  if (query.toLowerCase().includes("power of")) {
+    const regexPattern = /What is (\d+) to the power of (\d+)\?/;
+    const match = query.match(regexPattern);
+
+    if (match) {
+      const base = parseInt(match[1]);
+      const exponent = parseInt(match[2]);
+      const result = Math.pow(base, exponent);
+      return String(result);
+    } else {
+      return "Query does not match the expected format.";
+    }
+  } else {
+    return "Operation not supported";
+  }
 
 
   if (query.toLowerCase().includes("which of")) {
