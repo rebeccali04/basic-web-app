@@ -16,26 +16,26 @@ export default function QueryProcessor(query: string): string {
       "84" 
     );
   }
-  if (query.toLowerCase().includes("What is 65 plus 56")) {
-    return (
-      "130" 
-    );
-  }
-  if (query.toLowerCase().includes("What is 41 plus 23")) {
-    return (
-      "64" 
-    );
-  }
-  if (query.toLowerCase().includes("What is 84 plus 61")) {
-    return (
-      "145" 
-    );
-  }
-  if (query.toLowerCase().includes("WWhat is 27 plus 74")) {
-    return (
-      "101" 
-    );
-  }
+  // Check if the query includes a mathematical operation
+  if (query.includes("what is")) {
+    // Extract the numbers and the operation from the query
+    const numbers = query.match(/\d+/g); // Extracts all numbers
+    const operation = query.match(/plus|minus|times|divided by/g)[0]; // Extracts the operation
 
+    // Perform the arithmetic operation
+    if (operation === "plus") {
+      return parseInt(numbers[0]) + parseInt(numbers[1]);
+    } else if (operation === "minus") {
+      return parseInt(numbers[0]) - parseInt(numbers[1]);
+    } else if (operation === "times") {
+      return parseInt(numbers[0]) * parseInt(numbers[1]);
+    } else if (operation === "divided by") {
+      // Check for division by zero
+      if (parseInt(numbers[1]) === 0) {
+        return "Cannot divide by zero";
+      }
+      return parseInt(numbers[0]) / parseInt(numbers[1]);
+    }
+  }
   return "";
 }
