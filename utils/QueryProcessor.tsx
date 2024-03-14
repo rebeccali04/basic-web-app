@@ -21,6 +21,19 @@ export default function QueryProcessor(query: string): string {
       "84" 
     );
   }
+  if (query.toLowerCase().includes("minus")) {
+    const regexPattern = /What is (\d+) minus (\d+)\?/;
+    const match = query.match(regexPattern);
+
+    if (match) {
+      const number1 = parseInt(match[1]);
+      const number2 = parseInt(match[2]);
+      const result = number1 - number2;
+      return String(result);
+    } else {
+      return "Query does not match the expected format.";
+    }
+  }
   // const regex1 = 
 
 
