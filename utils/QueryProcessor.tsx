@@ -21,12 +21,16 @@ export default function QueryProcessor(query: string): string {
       "84" 
     );
   }
-  if (query.toLowerCase().includes("which of") {
+  // const regex1 = 
+
+
+  if (query.toLowerCase().includes("which of")) {
     const regexPattern = /Which of the following numbers is both a square and a cube: ((\d+),? ?)+\?/;
     const match = query.match(regexPattern);
   
     if (match) {
       const numbers = match[1].match(/\d+/g); // Extract numbers
+      if (numbers != null){
       const squareAndCubeNumbers = numbers.filter(number => {
         const root = Math.cbrt(Number(number));
         return Number.isInteger(root) && Math.sqrt(Number(number)) === root;
@@ -37,6 +41,7 @@ export default function QueryProcessor(query: string): string {
       } else {
         return "None of the given numbers is both a square and a cube.";
       }
+    }
     } else {
       return "Query does not match the expected format.";
     }
